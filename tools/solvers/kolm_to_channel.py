@@ -403,8 +403,8 @@ class TimeStepper(CartesianTimeStepper):
 
     def _enforce_symmetry(self):
 
-        odd_fields = ['v', 'c12']
-        even_fields = ['u', 'c11', 'c22', 'c33', 'p']
+        odd_fields = ['v', 'c12', 'uy', 'c11y', 'c22y', 'c33y']
+        even_fields = ['u', 'c11', 'c22', 'c33', 'p', 'vy', 'c12y']
 
         # y is Fourier, so freq are [0, 1, 2, ... , -2, -1]. Even means k(1) = k(-1) and odd means k(1) = -k(-1)
         for field_name in odd_fields:

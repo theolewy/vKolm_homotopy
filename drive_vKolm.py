@@ -8,7 +8,7 @@ material_params = {'W': 30,
                    'Re': 0.5,
                    'L': np.infty,
                    'eps': 1e-3,
-                   'rho': 0}
+                   'rho': 1}
 
 system_params = {'ndim': 2,
                  'Lx': 8 * np.pi,
