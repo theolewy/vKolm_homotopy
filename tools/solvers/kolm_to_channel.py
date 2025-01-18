@@ -406,15 +406,15 @@ class TimeStepper(CartesianTimeStepper):
         odd_fields = ['v', 'c12', 'uy', 'c11y', 'c22y', 'c33y']
         even_fields = ['u', 'c11', 'c22', 'c33', 'p', 'vy', 'c12y']
 
-        # y is Fourier, so freq are [0, 1, 2, ... , -2, -1]. Even means k(1) = k(-1) and odd means k(1) = -k(-1)
+        # y is Chebyshev, so freq are [0, 1, 2, 3, ...]. Even means k(odd) = 0 and odd means k(even) = 0
+
         for field_name in odd_fields:
             field = getattr(self, field_name)
-            field['c'][:, 1:] = (field['c'][:, 1:] - field['c'][:, 1:][:, ::-1]) / 2
-            field['c'][:, 0] = 0
+            field['c'][:, ::2] = 0
 
         for field_name in even_fields:
             field = getattr(self, field_name)
-            field['c'][:, 1:] = (field['c'][:, 1:] + field['c'][:, 1:][:, ::-1]) / 2
+            field['c'][:, 1::2] = 0
 
     
     def simulate(self, T=np.infty, ifreq=200, converge_cadence=None, convergence_limit=1e-4,
