@@ -16,7 +16,7 @@ system_params = {'ndim': 2,
 
 solver_params = {'Nx': 256,
                  'Ny': 256,
-                 'dt': 5e-3}
+                 'dt': 2e-3}
 
 log_all_params(material_params, system_params, solver_params)
 
