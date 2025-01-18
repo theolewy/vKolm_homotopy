@@ -400,6 +400,29 @@ class TimeStepper(CartesianTimeStepper):
         snapshots.add_task("integ(C11 + C22 + C33, 'y', 'x') / area", layout='g', name='<trace_lam>')
         
         return handler
+    
+    
+    def plot_snaps(self, subdirectory='', suffix_end='', plot_dev=True):
+
+        flow = self.get_flow(scale=1, combine_processes=True)
+        
+        base_flow = self.base_flow_full
+        # base_flow=None
+
+        if on_local_device():
+            fname=f"snaps2D_iter_{self.solver.iteration}"
+        else:
+            fname=f"snaps2D_W_{self.W}_Re_{self.Re}_rho_{self.rho}_eps_{self.eps}_beta_{self.beta}_L_{self.L}_Lx_{self.Lx:.4g}_Nx_{self.Nx}_Ny_{self.Ny}_{suffix_end}".replace('.', ',')
+
+        if self.ndim == 1:
+            raise Exception("Made 1D plotting possible")
+        elif self.ndim == 2:
+            self.plot_snaps_2D(flow, base_flow, subdirectory, suffix_end, plot_dev, fname)
+        elif self.ndim == 3:
+            self.plot_snaps_3D(flow, base_flow, subdirectory, suffix_end, plot_dev, fname)
+
+        self.set_scale(1.5)
+
 
     def _enforce_symmetry(self):
 
