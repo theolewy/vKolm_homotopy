@@ -11,7 +11,7 @@ material_params = {'W': 30,
                    'rho': 0}
 
 system_params = {'ndim': 2,
-                 'Lx': 8 * np.pi,
+                 'Lx': 6 * np.pi,
                  'n': 1}
 
 solver_params = {'Nx': 256,
