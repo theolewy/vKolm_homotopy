@@ -3,7 +3,7 @@ import numpy as np
 from tools.solvers.kolm_to_channel import BaseFlow, NumericSolver, TimeStepper
 from tools.misc_tools import get_ic_file, log_all_params, on_local_device
 
-material_params = {'W': 30,
+material_params = {'W': 50,
                    'beta': 0.9,
                    'Re': 0.5,
                    'L': np.infty,
@@ -11,19 +11,28 @@ material_params = {'W': 30,
                    'rho': 0}
 
 system_params = {'ndim': 2,
-                 'Lx': 6 * np.pi,
+                 'Lx': 8 * np.pi,
                  'n': 1}
 
-solver_params = {'Nx': 128,
-                 'Ny': 128,
+solver_params = {'Nx': 256,
+                 'Ny': 256,
                  'dt': 5e-3}
+
+if len(sys.argv) == 3:
+    job_idx = int(sys.argv[1])
+    rho = float(sys.argv[2])
+    system_params['rho'] = rho
+elif on_local_device():
+    pass
+else:
+    raise Exception('Need more inputs!')
 
 log_all_params(material_params, system_params, solver_params)
 
 timestepper = TimeStepper(material_params=material_params, system_params=system_params, solver_params=solver_params)
 
 ic_file, noise_coeff = get_ic_file(material_params, system_params, solver_params, suffix=f'recent-symmetric', subdir='arrowhead_2D', 
-                                   ic_dict_if_reinit=None)
+                                   ic_dict_if_reinit={'W': 30, 'Lx': 6*np.pi})
 
 timestepper.ic(ic_file=ic_file, flow=None, noise_coeff=noise_coeff)
 
