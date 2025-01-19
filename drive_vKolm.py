@@ -14,9 +14,9 @@ system_params = {'ndim': 2,
                  'Lx': 6 * np.pi,
                  'n': 1}
 
-solver_params = {'Nx': 256,
-                 'Ny': 256,
-                 'dt': 2e-3}
+solver_params = {'Nx': 128,
+                 'Ny': 128,
+                 'dt': 5e-3}
 
 log_all_params(material_params, system_params, solver_params)
 
