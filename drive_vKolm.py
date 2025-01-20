@@ -32,15 +32,15 @@ log_all_params(material_params, system_params, solver_params)
 timestepper = TimeStepper(material_params=material_params, system_params=system_params, solver_params=solver_params)
 
 ic_file, noise_coeff = get_ic_file(material_params, system_params, solver_params, suffix=f'recent-symmetric', subdir='arrowhead_2D', 
-                                   ic_dict_if_reinit={'W': 30, 'Lx': 6*np.pi})
+                                   ic_dict_if_reinit=None)
 
-timestepper.ic(ic_file=ic_file, flow=None, noise_coeff=noise_coeff)
+timestepper.ic(ic_file=ic_file, flow=None, noise_coeff=1e-4)
 
 timestepper.simulate(T=5000, ifreq=200, 
                      track_TW=False, 
-                     enforce_symmetry=True,
-                     save_over_long=False, 
+                     enforce_symmetry=False,
+                     save_over_long=True, 
                      save_full_data=False, full_save_freq=5,
                      OVERRIDE_LOCAL_SAVE=False,
-                     save_subdir='arrowhead_2D', suffix_end='symmetric', 
+                     save_subdir='arrowhead_2D', suffix_end='', 
                      plot=True, plot_dev=True, plot_subdirectory='arrowhead_2D')
