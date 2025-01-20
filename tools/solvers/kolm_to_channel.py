@@ -423,6 +423,17 @@ class TimeStepper(CartesianTimeStepper):
 
         self.set_scale(1.5)
 
+    def plot_metrics(self, subdirectory='', suffix_end=''):
+
+        fname = 'norm' if on_local_device() else f"norm_W_{self.W}_Re_{self.Re}_eps_{self.eps}_rho_{self.rho}_beta_{self.beta}_L_{self.L}_Lx_{self.Lx:.4g}_Nx_{self.Nx}_Ny_{self.Ny}_{suffix_end}".replace('.', ',')
+        fpath = os.path.join(self.core_root, 'images', 'simulations', subdirectory)
+        os.makedirs(fpath, exist_ok=True)
+        fpath = os.path.join(fpath, fname)
+        
+        plot_metrics(np.abs(self.v_metric_list), np.abs(self.KE_metric_list), np.abs(self.trace_metric_list),
+                        '|v|_dev', 'KE_dev', 'trace_dev', 
+                        self.time_list, self.material_params, fpath)
+
 
     def _enforce_symmetry(self):
 
