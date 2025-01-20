@@ -21,7 +21,7 @@ solver_params = {'Nx': 256,
 if len(sys.argv) == 3:
     job_idx = int(sys.argv[1])
     rho = float(sys.argv[2])
-    system_params['rho'] = rho
+    material_params['rho'] = rho
 elif on_local_device():
     pass
 else:
