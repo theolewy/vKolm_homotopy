@@ -358,8 +358,8 @@ class TimeStepper(CartesianTimeStepper):
         
         self.problem.add_bc('left(c11y)= 0')
         self.problem.add_bc('right(c11y)= 0')
-        self.problem.add_bc('left(c12y)= 0')
-        self.problem.add_bc('right(c12y)= 0')
+        self.problem.add_bc('left(c12)= 0')
+        self.problem.add_bc('right(c12)= 0')
         self.problem.add_bc('left(c22y)= 0')
         self.problem.add_bc('right(c22y)= 0')
         self.problem.add_bc('left(c33y)= 0')
