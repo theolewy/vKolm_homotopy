@@ -18,9 +18,10 @@ solver_params = {'Nx': 256,
                  'Ny': 256,
                  'dt': 5e-3}
 
-if len(sys.argv) == 3:
+if len(sys.argv) == 4:
     job_idx = int(sys.argv[1])
     rho = float(sys.argv[2])
+    rho_old = float(sys.argv[3])
     material_params['rho'] = rho
 elif on_local_device():
     pass
@@ -31,8 +32,8 @@ log_all_params(material_params, system_params, solver_params)
 
 timestepper = TimeStepper(material_params=material_params, system_params=system_params, solver_params=solver_params)
 
-ic_file, noise_coeff = get_ic_file(material_params, system_params, solver_params, suffix=f'recent-symmetric', subdir='arrowhead_2D', 
-                                   ic_dict_if_reinit={'rho':0})
+ic_file, noise_coeff = get_ic_file(material_params, system_params, solver_params, suffix=f'recent-', subdir='arrowhead_2D', 
+                                   ic_dict_if_reinit={'rho':rho_old})
 
 timestepper.ic(ic_file=ic_file, flow=None, noise_coeff=1e-4)
 
