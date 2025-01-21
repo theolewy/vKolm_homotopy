@@ -345,23 +345,42 @@ class TimeStepper(CartesianTimeStepper):
         self.problem.add_equation('c22y - dy(c22) = 0')
         self.problem.add_equation('c33y - dy(c33) = 0')
 
-        # impose periodic conditions with semi-homotopy to channel flow. 
+        # impose symmetry conditions in vKolm.  with semi-homotopy to channel flow. 
         # i.e. replace v-periodicity (kolmogorov) when rho=0 with no penetration (channel)
-        self.problem.add_bc('left(u) - right(u) = 0')
-        self.problem.add_bc('left(uy) - right(uy) = 0')
-        # self.problem.add_bc('(left(vy) - right(vy)) * (1-rho) + right(v) * rho = 0')
-        self.problem.add_bc('(left(v) - right(v)) * (1-rho) + left(v) * rho = 0', condition='(nx != 0)')  
+        
+        self.problem.add_bc('left(uy) = 0')
+        self.problem.add_bc('right(uy) = 0')
+        self.problem.add_bc('left(v) * (1 - rho) + left(vy) * rho = 0')
+        self.problem.add_bc('right(v) * (1 - rho) + right(vy) * rho = 0', condition='(nx != 0)')
         self.problem.add_bc('left(p) = 0', condition='(nx == 0)')
         
-        self.problem.add_bc('left(c11) - right(c11) = 0')
-        self.problem.add_bc('left(c12) - right(c12) = 0')
-        self.problem.add_bc('left(c22) - right(c22) = 0')
-        self.problem.add_bc('left(c33) - right(c33) = 0')
-        self.problem.add_bc('left(c11y) - right(c11y) = 0')
-        self.problem.add_bc('left(c12y) - right(c12y) = 0')
-        self.problem.add_bc('left(c22y) - right(c22y) = 0')
-        self.problem.add_bc('left(c33y) - right(c33y) = 0')
-        self.problem.add_bc('left(p) - right(p) = 0')
+        self.problem.add_bc('left(c11y)= 0')
+        self.problem.add_bc('right(c11y)= 0')
+        self.problem.add_bc('left(c12y)= 0')
+        self.problem.add_bc('right(c12y)= 0')
+        self.problem.add_bc('left(c22y)= 0')
+        self.problem.add_bc('right(c22y)= 0')
+        self.problem.add_bc('left(c33y)= 0')
+        self.problem.add_bc('right(c33y)= 0')
+        self.problem.add_bc('left(c12)= 0')
+        self.problem.add_bc('right(c12)= 0')
+
+        ############
+        # self.problem.add_bc('left(u) - right(u) = 0')
+        # self.problem.add_bc('left(uy) - right(uy) = 0')
+        # # self.problem.add_bc('(left(vy) - right(vy)) * (1-rho) + right(v) * rho = 0')
+        # self.problem.add_bc('(left(v) - right(v)) * (1-rho) + left(v) * rho = 0', condition='(nx != 0)')  
+        # self.problem.add_bc('left(p) = 0', condition='(nx == 0)')
+        
+        # self.problem.add_bc('left(c11) - right(c11) = 0')
+        # self.problem.add_bc('left(c12) - right(c12) = 0')
+        # self.problem.add_bc('left(c22) - right(c22) = 0')
+        # self.problem.add_bc('left(c33) - right(c33) = 0')
+        # self.problem.add_bc('left(c11y) - right(c11y) = 0')
+        # self.problem.add_bc('left(c12y) - right(c12y) = 0')
+        # self.problem.add_bc('left(c22y) - right(c22y) = 0')
+        # self.problem.add_bc('left(c33y) - right(c33y) = 0')
+        # self.problem.add_bc('left(p) - right(p) = 0')
 
     def add_tasks(self, save_freq='slow', suffix='', subdir='', save_all_fields=True, mode='append'):
 
