@@ -41,6 +41,5 @@ timestepper.simulate(T=5000, ifreq=200,
                      enforce_symmetry=False,
                      save_over_long=True, 
                      save_full_data=False, full_save_freq=5,
-                     OVERRIDE_LOCAL_SAVE=False,
                      save_subdir='arrowhead_2D', suffix_end='', 
                      plot=True, plot_dev=True, plot_subdirectory='arrowhead_2D')

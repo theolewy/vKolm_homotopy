@@ -303,6 +303,8 @@ class TimeStepper(CartesianTimeStepper):
     def _set_system_specific_substitutions(self):
 
         self.problem.substitutions['F'] = "(1 + eps * beta * W) / (1 + eps * W) * cos(y)"
+    
+    def _set_system_specific_basic_substitutions(self):
 
         self.problem.substitutions['w'] = "0"
         self.problem.substitutions['wy'] = "dy(w)"
@@ -362,8 +364,6 @@ class TimeStepper(CartesianTimeStepper):
         self.problem.add_bc('right(c22y)= 0')
         self.problem.add_bc('left(c33y)= 0')
         self.problem.add_bc('right(c33y)= 0')
-        self.problem.add_bc('left(c12)= 0')
-        self.problem.add_bc('right(c12)= 0')
 
         ############
         # self.problem.add_bc('left(u) - right(u) = 0')
