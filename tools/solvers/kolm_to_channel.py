@@ -128,28 +128,19 @@ class BaseFlow(CartesianBaseFlow):
         self.problem.add_equation('dy(c13) - c13y = 0')
         self.problem.add_equation('dy(c23) - c23y = 0')
 
-        self.problem.add_bc('left(c11) - right(c11) = 0')
-        self.problem.add_bc('left(c12) - right(c12) = 0')
-        self.problem.add_bc('left(c22) - right(c22) = 0')
-        self.problem.add_bc('left(c33) - right(c33) = 0')
-        self.problem.add_bc('left(c13) - right(c13) = 0')
-        self.problem.add_bc('left(c23) - right(c23) = 0')
-        self.problem.add_bc('left(c11y) - right(c11y) = 0')
-        self.problem.add_bc('left(c12y) - right(c12y) = 0')
-        self.problem.add_bc('left(c22y) - right(c22y) = 0')
-        self.problem.add_bc('left(c33y) - right(c33y) = 0')
-        self.problem.add_bc('left(c13y) - right(c13y) = 0')
-        self.problem.add_bc('left(c23y) - right(c23y) = 0')
-
-        self.problem.add_bc('left(v) = 0')
-        self.problem.add_bc('left(p) = 0')
-
-        # NB when solved analytically, we get U = cosy + Ay + B. Set bc of U to ensure A=B=0
-        self.problem.add_bc('left(u) = -1')
-        self.problem.add_bc('right(u) = -1')
-
-        self.problem.add_bc('left(w)  = 0')
-        self.problem.add_bc('right(w)  = 0')
+        self.problem.add_bc('left(uy) = 0')
+        self.problem.add_bc('right(uy) = 0')
+        self.problem.add_bc('left(v) * (1 - rho) + left(vy) * rho = 0')
+        self.problem.add_bc('left(p) = 0', condition='(nx == 0)')
+        
+        self.problem.add_bc('left(c11y)= 0')
+        self.problem.add_bc('right(c11y)= 0')
+        self.problem.add_bc('left(c12)= 0')
+        self.problem.add_bc('right(c12)= 0')
+        self.problem.add_bc('left(c22y)= 0')
+        self.problem.add_bc('right(c22y)= 0')
+        self.problem.add_bc('left(c33y)= 0')
+        self.problem.add_bc('right(c33y)= 0')
 
     def _guess_base(self):
 
