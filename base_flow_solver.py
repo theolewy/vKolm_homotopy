@@ -1,5 +1,5 @@
 import numpy as np
-from tools.solvers.kolm_to_channel import BaseFlow, NumericSolver, TimeStepper
+from tools.kolm_to_channel import BaseFlow, NumericSolver, TimeStepper
 
 material_params = {'W': 30,
                    'beta': 0.9,
