@@ -14,8 +14,8 @@ system_params = {'ndim': 2,
                  'Lx': 8 * np.pi,
                  'n': 1}
 
-solver_params = {'Nx': 64,
-                 'Ny': 128,
+solver_params = {'Nx': 256,
+                 'Ny': 256,
                  'dt': 1e-2}
 
 if len(sys.argv) == 3:
@@ -32,14 +32,14 @@ log_all_params(material_params, system_params, solver_params)
 timestepper = TimeStepper(material_params=material_params, system_params=system_params, solver_params=solver_params)
 
 ic_file, noise_coeff = get_ic_file(material_params, system_params, solver_params, suffix=f'recent-', subdir='arrowhead_2D', 
-                                   ic_dict_if_reinit=None)
+                                   ic_dict_if_reinit={'suffix': 'recent-symmetric'})
 
 timestepper.ic(ic_file=ic_file, flow=None, noise_coeff=1e-3)
 
 timestepper.simulate(T=5000, ifreq=200, 
                      track_TW=False, 
                      enforce_symmetry=False,
-                     save_over_long=True, 
+                     save_over_long=False, 
                      save_full_data=False, full_save_freq=5,
                      save_subdir='arrowhead_2D', suffix_end='', 
                      plot=True, plot_dev=True, plot_subdirectory='arrowhead_2D')
