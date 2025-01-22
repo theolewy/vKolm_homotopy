@@ -32,7 +32,7 @@ log_all_params(material_params, system_params, solver_params)
 timestepper = TimeStepper(material_params=material_params, system_params=system_params, solver_params=solver_params)
 
 ic_file, noise_coeff = get_ic_file(material_params, system_params, solver_params, suffix=f'recent-', subdir='arrowhead_2D', 
-                                   ic_dict_if_reinit={'suffix': 'recent-symmetric'})
+                                   ic_dict_if_reinit={'rho': 0, suffix': 'recent-symmetric'})
 
 timestepper.ic(ic_file=ic_file, flow=None, noise_coeff=1e-3)
 
