@@ -16,7 +16,7 @@ system_params = {'ndim': 2,
 
 solver_params = {'Nx': 256,
                  'Ny': 256,
-                 'dt': 1e-2}
+                 'dt': 2e-3}
 
 if len(sys.argv) == 3:
     job_idx = int(sys.argv[1])
