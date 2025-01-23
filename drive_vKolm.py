@@ -34,7 +34,7 @@ timestepper = TimeStepper(material_params=material_params, system_params=system_
 ic_file, noise_coeff = get_ic_file(material_params, system_params, solver_params, suffix=f'recent-', subdir='arrowhead_2D', 
                                    ic_dict_if_reinit={'rho': 0, 'suffix': 'recent-symmetric'})
 
-timestepper.ic(ic_file=ic_file, flow=None, noise_coeff=1e-3)
+timestepper.ic(ic_file=ic_file, flow=None, noise_coeff=noise_coeff)
 
 timestepper.simulate(T=5000, ifreq=200, 
                      track_TW=False, 
